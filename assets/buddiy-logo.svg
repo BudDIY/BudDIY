@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        .buddy { fill: #000000; }
+        .hardhat { fill: #FFD700; }
+    </style>
+    <g id="buddiy-character">
+        <!-- Body -->
+        <circle class="buddy" cx="100" cy="100" r="50"/>
+        
+        <!-- Hard Hat -->
+        <path class="hardhat" d="M60 85 Q100 50 140 85 L140 95 Q100 60 60 95 Z"/>
+        
+        <!-- Eyes -->
+        <circle fill="white" cx="85" cy="95" r="10"/>
+        <circle fill="white" cx="115" cy="95" r="10"/>
+        <circle fill="black" cx="85" cy="95" r="5"/>
+        <circle fill="black" cx="115" cy="95" r="5"/>
+        
+        <!-- Smile -->
+        <path fill="white" d="M80 115 Q100 135 120 115" stroke="white" stroke-width="3" fill="none"/>
+        
+        <!-- Hammer -->
+        <rect class="hardhat" x="140" y="90" width="40" height="10" transform="rotate(45, 140, 95)"/>
+        <rect fill="#8B4513" x="150" y="85" width="20" height="20" transform="rotate(45, 140, 95)"/>
+    </g>
+</svg>
