@@ -47,10 +47,65 @@
             animation: float 3s ease-in-out infinite;
         }
 
+        .logo-container {
+            position: relative;
+            display: inline-block;
+        }
+
         .logo {
             width: 250px;
             height: auto;
             margin-bottom: 20px;
+        }
+
+        .bark-container {
+            position: absolute;
+            bottom: 60%;
+            left: 30%;
+            width: 0;
+            height: 0;
+            pointer-events: none;
+        }
+
+        .bark-bubble {
+            position: absolute;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 15px;
+            font-size: 14px;
+            color: #40E0D0;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translate(0, 0);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            pointer-events: none;
+        }
+
+        .bark-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            right: 10px;
+            border-width: 6px 6px 0;
+            border-style: solid;
+            border-color: white transparent transparent;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 0;
+                transform: translate(0, 0);
+            }
+            20% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-100px, -100px);
+            }
         }
 
         .message {
@@ -140,12 +195,6 @@
             border-color: #40E0D0;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-
         .success-message {
             display: none;
             position: fixed;
@@ -205,7 +254,10 @@
 </head>
 <body>
     <div class="container">
-        <img src="images/logo.png" alt="BudDIY Logo" class="logo">
+        <div class="logo-container">
+            <img src="images/logo.png" alt="BudDIY Logo" class="logo">
+            <div class="bark-container"></div>
+        </div>
         <div class="message">Heisann! 👋<br>BudDIY bygger noe kult her!<br>Kom tilbake snart!</div>
         <button class="contact-btn" onclick="openModal()">Kontakt Oss</button>
     </div>
@@ -292,6 +344,40 @@
                 alert('Oops! Det oppstod et problem med å sende skjemaet.');
             });
         }
+
+        function animateBark() {
+            const container = document.querySelector('.bark-container');
+            
+            function createBarkBubble() {
+                const bubble = document.createElement('div');
+                bubble.className = 'bark-bubble';
+                bubble.textContent = 'Voff';
+                container.appendChild(bubble);
+                
+                // Set unique animation for each bubble with slower duration
+                bubble.style.animation = 'floatUp 3s ease-out forwards';
+                
+                // Remove bubble after animation
+                bubble.addEventListener('animationend', () => {
+                    bubble.remove();
+                });
+            }
+            
+            function startBarkSequence() {
+                // Create three bubbles with longer delays
+                createBarkBubble();
+                setTimeout(createBarkBubble, 1000);
+                setTimeout(createBarkBubble, 2000);
+                
+                // Longer pause between sequences
+                setTimeout(startBarkSequence, 6000);
+            }
+            
+            startBarkSequence();
+        }
+        
+        // Start the barking animation when the page loads
+        window.addEventListener('load', animateBark);
     </script>
 </body>
 </html>
